@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>口コミ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background-color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .store-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .message {
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .ratings {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .ratings-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .rating-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #999;
+      border-radius: 12px;
+      background: #fff;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.1s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .rating-btn:active {
+      transform: scale(0.95);
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .rating-btn-large {
+      width: 120px;
+      height: 120px;
+      gap: 4px;
+    }
+
+    .rating-btn-small {
+      width: 90px;
+      height: 90px;
+      gap: 2px;
+    }
+
+    .rating-btn .emoji {
+      line-height: 1;
+    }
+
+    .rating-btn-large .emoji {
+      font-size: 56px;
+    }
+
+    .rating-btn-small .emoji {
+      font-size: 40px;
+    }
+
+    .rating-btn .label {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="store-name" id="storeName">佐賀タクシー</h1>
+    <p class="message">
+      この度はご利用頂きありがとうございました。<br>
+      更なるサービス改善の為、<br>
+      満足状況についてお聞かせ下さい。
+    </p>
+    <div class="ratings">
+      <div class="ratings-row">
+        <button class="rating-btn rating-btn-large" data-rating="5">
+          <span class="emoji">😄</span>
+          <span class="label">5</span>
+        </button>
+        <button class="rating-btn rating-btn-large" data-rating="4">
+          <span class="emoji">🙂</span>
+          <span class="label">4</span>
+        </button>
+      </div>
+      <div class="ratings-row">
+        <button class="rating-btn rating-btn-small" data-rating="3">
+          <span class="emoji">😐</span>
+          <span class="label">3</span>
+        </button>
+        <button class="rating-btn rating-btn-small" data-rating="2">
+          <span class="emoji">😢</span>
+          <span class="label">2</span>
+        </button>
+        <button class="rating-btn rating-btn-small" data-rating="1">
+          <span class="emoji">😨</span>
+          <span class="label">1</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ========== 設定 ==========
+    const CONFIG = {
+      storeName: '佐賀タクシー',
+      highRatingUrl: 'https://g.page/r/CWRadYEyYRseEBM/review',
+      lowRatingUrl: 'https://docs.google.com/forms/d/xxx',
+    };
+    // ===========================
+
+    document.getElementById('storeName').textContent = CONFIG.storeName;
+
+    document.querySelectorAll('.rating-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var rating = Number(this.dataset.rating);
+        if (rating >= 4) {
+          window.location.href = CONFIG.highRatingUrl;
+        } else {
+          window.location.href = CONFIG.lowRatingUrl;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
